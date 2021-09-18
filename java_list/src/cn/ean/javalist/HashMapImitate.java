@@ -375,6 +375,7 @@ public class HashMapImitate<K,V> extends AbstractMap<K,V>
         o.put("aaaa", "aaaa");
         o.put("aaab", "aaab");
         o.put("aaac", "aaac");
+        o.put("aaad", "aaad");
         System.out.println( "debug:aaaaa:" +
         HashMapImitate.hash("aaaaa")
         );
