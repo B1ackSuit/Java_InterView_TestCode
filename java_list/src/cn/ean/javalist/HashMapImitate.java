@@ -68,6 +68,10 @@ public class HashMapImitate<K,V> extends AbstractMap<K,V>
 
     static final int hash(Object key) {
         int h;
+        System.out.println("key.hashCode():" + key.hashCode());
+        h = key.hashCode();
+        System.out.println("key.hashCode() >>> 16" + (h >>> 16));
+        System.out.println("h ^ (h >>> 16)" + (h ^ (h >>> 16)));
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
 
@@ -238,9 +242,81 @@ public class HashMapImitate<K,V> extends AbstractMap<K,V>
         return newTab;
     }
 
-    public V put(K key, V value) {
-        return putVal(hash(key), key, value, false, true);
+
+    final Node<K,V>[] resizeCSDN() {
+        Node<K,V>[] oldTab = table;//oldTab指向hash桶数组
+        int oldCap = (oldTab == null) ? 0 : oldTab.length;
+        int oldThr = threshold;
+        int newCap, newThr = 0;
+        if (oldCap > 0) {//如果oldCap不为空的话，就是hash桶数组不为空
+            if (oldCap >= MAXIMUM_CAPACITY) {//如果大于最大容量了，就赋值为整数最大的阀值
+                threshold = Integer.MAX_VALUE;
+                return oldTab;//返回
+            }//如果当前hash桶数组的长度在扩容后仍然小于最大容量 并且oldCap大于默认值16
+            else if ((newCap = oldCap << 1) < MAXIMUM_CAPACITY &&
+                    oldCap >= DEFAULT_INITIAL_CAPACITY)
+                newThr = oldThr << 1; // double threshold 双倍扩容阀值threshold
+        }
+        else if (oldThr > 0) // initial capacity was placed in threshold
+            newCap = oldThr;
+        else {               // zero initial threshold signifies using defaults
+            newCap = DEFAULT_INITIAL_CAPACITY;
+            newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+        }
+        if (newThr == 0) {
+            float ft = (float)newCap * loadFactor;
+            newThr = (newCap < MAXIMUM_CAPACITY && ft < (float)MAXIMUM_CAPACITY ?
+                    (int)ft : Integer.MAX_VALUE);
+        }
+        threshold = newThr;
+        @SuppressWarnings({"rawtypes","unchecked"})
+        Node<K,V>[] newTab = (Node<K,V>[])new Node[newCap];//新建hash桶数组
+        table = newTab;    // 将新数组的值复制给旧的hash桶数组
+        if (oldTab != null) {    // 进行扩容操作，复制Node对象值到新的hash桶数组
+            for (int j = 0; j < oldCap; ++j) {
+                Node<K,V> e;
+                if ((e = oldTab[j]) != null) {    // 如果旧的hash桶数组在j结点处不为空，复制给e
+                    oldTab[j] = null;    // 将旧的hash桶数组在j结点处设置为空，方便gc
+                    if (e.next == null)    // 如果e后面没有Node结点
+                        newTab[e.hash & (newCap - 1)] = e;    // 直接对e的hash值和新的数组长度进行位运算获得存储位置
+//                    else if (e instanceof TreeNode)//如果e是红黑树的类型，那么添加到红黑树中
+//                        ((TreeNode<K,V>)e).split(this, newTab, j, oldCap);
+                    else { // preserve order
+                        Node<K,V> loHead = null, loTail = null;
+                        Node<K,V> hiHead = null, hiTail = null;
+                        Node<K,V> next;
+                        do {
+                            next = e.next;//将Node结点的next赋值给next
+                            if ((e.hash & oldCap) == 0) {//如果结点e的hash值与原hash桶数组的长度作与运算为0
+                                if (loTail == null)//如果loTail为null
+                                    loHead = e;//将e结点赋值给loHead
+                                else
+                                    loTail.next = e;//否则将e赋值给loTail.next
+                                loTail = e;//然后将e复制给loTail
+                            }
+                            else {//如果结点e的hash值与原hash桶数组的长度作与运算不为0
+                                if (hiTail == null)//如果hiTail为null
+                                    hiHead = e;//将e赋值给hiHead
+                                else
+                                    hiTail.next = e;//如果hiTail不为空，将e复制给hiTail.next
+                                hiTail = e;//将e复制个hiTail
+                            }
+                        } while ((e = next) != null);//直到e为空
+                        if (loTail != null) {//如果loTail不为空
+                            loTail.next = null;//将loTail.next设置为空
+                            newTab[j] = loHead;//将loHead赋值给新的hash桶数组[j]处
+                        }
+                        if (hiTail != null) {//如果hiTail不为空
+                            hiTail.next = null;//将hiTail.next赋值为空
+                            newTab[j + oldCap] = hiHead;//将hiHead赋值给新的hash桶数组[j+旧hash桶数组长度]
+                        }
+                    }
+                }
+            }
+        }
+        return newTab;
     }
+
 
     final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
                    boolean evict) {
@@ -292,5 +368,12 @@ public class HashMapImitate<K,V> extends AbstractMap<K,V>
     @Override
     public Set<Entry<K, V>> entrySet() {
         return null;
+    }
+
+    public static void main(String[] args) {
+        HashMapImitate<String, String> o = new HashMapImitate<>();
+        System.out.println( "debug:aaaaa:" +
+        HashMapImitate.hash("aaaaa")
+        );
     }
 }
