@@ -7,7 +7,7 @@ package cn.ean.exit;
  **/
 public class ThreadExit {
     public static void main(String[] args) {
-        T t1 = new T();
+        ThreadT t1 = new ThreadT();
         t1.start();
 
         try {
@@ -21,7 +21,7 @@ public class ThreadExit {
     }
 }
 
-class T extends Thread{
+class ThreadT extends Thread{
 
     private int count = 0;
     //设置一个控制变量
