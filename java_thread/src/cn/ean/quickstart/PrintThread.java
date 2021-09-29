@@ -2,6 +2,7 @@ package cn.ean.quickstart;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * FileName:PrintThread
@@ -70,6 +71,7 @@ class Main{
 
         threadFactory.newThread(new PrintRunnable("Good")).start();
 
-
+        ReentrantLock reentrantLock = new ReentrantLock();
+        reentrantLock.lock();
     }
 }
