@@ -1,5 +1,6 @@
 package cn.ean.reentrantlock;
 
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -10,6 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ReentrantLockBank {
 
     private ReentrantLock bankLock = new ReentrantLock();
+
 
     // 银行账户数组
     private final double[] accounts;
@@ -34,11 +36,29 @@ public class ReentrantLockBank {
      * @param amount 转账的金额
      *
      */
-    public void transfer(int from, int to, double amount){
+    public void transfer(int from, int to, double amount) throws InterruptedException {
+        Condition condition = bankLock.newCondition();
+
+        condition.await();
 
         bankLock.lock();
+
+        Thread.currentThread().isInterrupted();
+        Thread.currentThread().interrupted();
+
+
+
+
         System.out.println("===bank lock===");
         try {
+
+            synchronized (this){
+
+            }
+
+
+            int i = 0;
+
 
             var object = new ReentrantLockObject();
 
