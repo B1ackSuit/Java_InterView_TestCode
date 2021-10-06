@@ -20,6 +20,8 @@ public class MyExecutor {
     public void ExecutorsTest() throws ExecutionException, InterruptedException {
 
         ExecutorService threadPool = Executors.newFixedThreadPool(taskSize);
+
+
         List<Future> futureList = new ArrayList<>();
         for (int i = 0; i < taskSize; i++){
             Callable callable = new MyCallable();
