@@ -1,7 +1,7 @@
 package cn.ean.blockingqueue;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.*;
+
 
 /**
  * FileName:TestBlockQueue
@@ -10,8 +10,11 @@ import java.util.concurrent.BlockingQueue;
  **/
 public class TestBlockingQueue {
     private BlockingQueue queue;
+    private ExecutorService service;
 
     public void testBlockingQueue(){
-        queue = new ArrayBlockingQueue();
+        queue = new LinkedBlockingQueue();
+        service = Executors.newCachedThreadPool();
+
     }
 }
