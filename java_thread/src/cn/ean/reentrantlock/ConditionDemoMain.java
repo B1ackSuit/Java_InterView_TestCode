@@ -46,5 +46,7 @@ public class ConditionDemoMain {
 
             System.out.println("___________thread3________ end");
         }).start();
+
+        System.out.println("main thread end");
     }
 }
