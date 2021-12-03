@@ -4,9 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/idea_workspace.iml" filepath="$PROJECT_DIR$/.idea/idea_workspace.iml" />
       <module fileurl="file://$PROJECT_DIR$/java_basics/java_basics.iml" filepath="$PROJECT_DIR$/java_basics/java_basics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java_high_concurrency_core_programming/java_high_concurrency_core_programming.iml" filepath="$PROJECT_DIR$/java_high_concurrency_core_programming/java_high_concurrency_core_programming.iml" />
       <module fileurl="file://$PROJECT_DIR$/java_jvm/java_jvm.iml" filepath="$PROJECT_DIR$/java_jvm/java_jvm.iml" />
       <module fileurl="file://$PROJECT_DIR$/java_list/java_list.iml" filepath="$PROJECT_DIR$/java_list/java_list.iml" />
       <module fileurl="file://$PROJECT_DIR$/java_special/java_special.iml" filepath="$PROJECT_DIR$/java_special/java_special.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java_test/java_test.iml" filepath="$PROJECT_DIR$/java_test/java_test.iml" />
       <module fileurl="file://$PROJECT_DIR$/java_thread/java_thread.iml" filepath="$PROJECT_DIR$/java_thread/java_thread.iml" />
     </modules>
   </component>
