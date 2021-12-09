@@ -10,14 +10,16 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.SocketAddress;
 import java.net.SocketOption;
+import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Logger;
 
 /**
- * @author ea
+ * @author ean
  **/
 public class SingleThreadReactorPattern {
     Selector selector;
