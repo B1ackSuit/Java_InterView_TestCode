@@ -38,12 +38,12 @@ public class GeneralServerThread extends Thread{
             HtmlProcess h = new HtmlProcess();
             if (request.getUrl().equals("/"))
             {
-                String strHtml=h.toHtmlString(new File("src/index.html"));
+                String strHtml=h.toHtmlString(new File("C:\\Study\\Java\\idea_workspace\\Java_InterView_TestCode\\java_http\\src\\index.html"));
                 response.print(strHtml);
             }
             else
             {
-                String str404=h.toHtmlString(new File("src/404.html"));
+                String str404=h.toHtmlString(new File("C:\\Study\\Java\\idea_workspace\\Java_InterView_TestCode\\java_http\\src\\index.html"));
                 response.print(str404);
             }
         } catch (Exception e) {
