@@ -30,6 +30,7 @@ public class ArrayListImitate<E> extends AbstractList<E> {
         this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
     }
 
+    @Override
     public boolean add(E e) {
         modCount++;
         add(e, elementData, size);
@@ -37,8 +38,9 @@ public class ArrayListImitate<E> extends AbstractList<E> {
     }
 
     private void add(E e, Object[] elementData, int s) {
-        if (s == elementData.length)
+        if (s == elementData.length) {
             elementData = grow();
+        }
         elementData[s] = e;
         size = s + 1;
     }
@@ -57,10 +59,13 @@ public class ArrayListImitate<E> extends AbstractList<E> {
         int oldCapacity = elementData.length;
         int newCapacity = oldCapacity + (oldCapacity >> 1);
         if (newCapacity - minCapacity <= 0) {
-            if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
+            if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
                 return Math.max(DEFAULT_CAPACITY, minCapacity);
+            }
             if (minCapacity < 0) // overflow
+            {
                 throw new OutOfMemoryError();
+            }
             return minCapacity;
         }
         return (newCapacity - MAX_ARRAY_SIZE <= 0)
