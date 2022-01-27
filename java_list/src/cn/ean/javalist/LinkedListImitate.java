@@ -13,6 +13,8 @@ import java.util.function.Consumer;
 public class LinkedListImitate<E> extends AbstractSequentialList<E>
         implements List<E>, Deque<E>, Cloneable, java.io.Serializable{
 
+    List list = new LinkedList();
+
     private static class Node<E> {
         E item;
         Node<E> next;

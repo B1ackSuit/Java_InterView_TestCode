@@ -2,6 +2,8 @@ package cn.ean.collectionjdk;
 
 
 
+import jdk.internal.misc.SharedSecrets;
+
 import java.util.*;
 
 /**
@@ -57,6 +59,8 @@ public class SimulateArrayList<E> extends AbstractList<E>
      * 用于表示实际有数据的ArrayList数组的大小
      */
     private int size;
+
+
     private int index;
 
     /*
@@ -211,7 +215,6 @@ public class SimulateArrayList<E> extends AbstractList<E>
      * 参数为minCapacity
      * 如果是add方法调用无参grow()，则无参grow传入的参数为size+1，即最低扩容长度
      * size+1是因为数组目前已经满了，并且此时又add了一个新的数据，所以扩容后的容量的最低标准是size+1，所以取名：minCapacity
-     *
      */
     private Object[] grow(int minCapacity) {
         return elementData = Arrays.copyOf(elementData,
@@ -289,7 +292,7 @@ public class SimulateArrayList<E> extends AbstractList<E>
      * 如果数组长度 大于 缓冲区长度-已用长度(即剩余可用的长度)
      *     缓冲区长度扩容，调用有参grow，参数为已用长度+数组长度
      * 如果已用长度-要插入的位置 大于 0，即要插入的位置在已用长度中，即需要将要插入位置及其后面的所有已用元素进行移动
-     *       通过System.arraycopy()方法，将要插入的位置及其后面的元素进行移动，移动的距离为 已用长度+数组长度
+     *     通过System.arraycopy()方法，将要插入的位置及其后面的元素进行移动，移动的距离为 已用长度+数组长度
      * 如果已用长度-要插入的位置 不大于 0，则直接通过System.arraycopy()将数组插入到指定位置
      * size为旧的已用长度+数组长度
      *
@@ -344,6 +347,64 @@ public class SimulateArrayList<E> extends AbstractList<E>
     /*
      * addAll方法结束==================================================
      */
+
+    /*
+     * ==================================================序列化方法开始
+     * 采用这种序列化的原因是：elementData是一个缓存数组，为了性能的考虑，它通常会预留一些容量，当容量不足时会扩充容量，
+     * 因此，可能会有大量的空间没有实际存储元素。采用上面的方式来实现序列化可以保证只序列化实际有值的那些元素，而不序列化整个数组。
+     */
+
+    private void writeObject(java.io.ObjectOutputStream s)
+            throws java.io.IOException {
+        // Write out element count, and any hidden stuff
+        int expectedModCount = modCount;
+        s.defaultWriteObject();
+
+        // Write out size as capacity for behavioral compatibility with clone()
+        s.writeInt(size);
+
+        // Write out all elements in the proper order.
+        for (int i=0; i<size; i++) {
+            s.writeObject(elementData[i]);
+        }
+
+        if (modCount != expectedModCount) {
+            throw new ConcurrentModificationException();
+        }
+    }
+
+    private void readObject(java.io.ObjectInputStream s)
+            throws java.io.IOException, ClassNotFoundException {
+
+        // Read in size, and any hidden stuff
+        s.defaultReadObject();
+
+        // Read in capacity
+        s.readInt(); // ignored
+
+        if (size > 0) {
+            // like clone(), allocate array based upon size not capacity
+            SharedSecrets.getJavaObjectInputStreamAccess().checkArray(s, Object[].class, size);
+            Object[] elements = new Object[size];
+
+            // Read in all elements in the proper order.
+            for (int i = 0; i < size; i++) {
+                elements[i] = s.readObject();
+            }
+
+            elementData = elements;
+        } else if (size == 0) {
+            elementData = EMPTY_ELEMENTDATA;
+        } else {
+            throw new java.io.InvalidObjectException("Invalid size: " + size);
+        }
+    }
+
+    /*
+     * 序列化方法结束==================================================
+     */
+
+
 
 
 

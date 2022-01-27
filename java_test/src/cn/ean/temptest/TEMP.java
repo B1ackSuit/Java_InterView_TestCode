@@ -18,7 +18,9 @@ public class TEMP {
     @Test
     public void testSimulateArrayList() {
         List<String> list = new SimulateArrayList<>();
-     //   List<String> list = new ArrayList<>();
+
+        List<String> list1 = new ArrayList<>();
+
         list.add("a");
         list.add("b");
         list.add("c");
@@ -27,7 +29,7 @@ public class TEMP {
         list.add("b");
 
         boolean c = list.contains("c");
-        System.out.println(c);
+        //   System.out.println(c);
 
     }
 
@@ -61,5 +63,30 @@ public class TEMP {
 
 
 
+    @Test
+    public void testFinal() {
+        A a = new A(1);
+        final A i = a;
+        i.setI(2);
+        System.out.println(a.getI() + "---" + i.getI());
+
+    }
+
+
+}
+class A {
+    private int i;
+
+    public A(int i) {
+        this.i = i;
+    }
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
+    }
 }
 
