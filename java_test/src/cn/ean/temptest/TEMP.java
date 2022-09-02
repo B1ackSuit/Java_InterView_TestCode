@@ -1,6 +1,6 @@
 package cn.ean.temptest;
 
-import cn.ean.collectionjdk.SimulateArrayList;
+import cn.ean.collectionjdk.SimulateArrayList20220114;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class TEMP {
 
     @Test
     public void testSimulateArrayList() {
-        List<String> list = new SimulateArrayList<>();
+        List<String> list = new SimulateArrayList20220114<>();
 
         List<String> list1 = new ArrayList<>();
 
@@ -47,6 +47,7 @@ public class TEMP {
 
     @Test
     public void testSubList() {
+        String a = "a";
         List<String> strings = new ArrayList<>() {{
             add("1");
             add("2");

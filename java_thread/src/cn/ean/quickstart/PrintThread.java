@@ -36,6 +36,10 @@ public class PrintThread extends Thread{
 class PrintRunnable implements Runnable{
     private String message;
 
+
+
+
+
     public PrintRunnable(String message) {
         this.message = message;
     }

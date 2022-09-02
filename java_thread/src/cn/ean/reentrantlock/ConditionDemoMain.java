@@ -10,25 +10,37 @@ public class ConditionDemoMain {
             System.out.println("___________thread1________ end");
         });
 
-        new Thread(() ->{
+        new Thread(() -> {
             System.out.println("___________thread2________ begin");
             for(int i = 0; i < 5; i++){
+
                 try {
+
                     Thread.sleep(500);
+
                 } catch (InterruptedException e) {
+
                     e.printStackTrace();
+
                 }
+
                 demo.testConditionMethod2();
+
                 System.out.println("thread2:" + i);
+
                 if (i == 4){
+
                     demo.testConditionMethod1();
+
                 }
             }
 
             System.out.println("___________thread2________ end");
+
         }).start();
 
         new Thread(() ->{
+            
             System.out.println("___________thread3________ begin");
 
             for(int i = 0; i < 5; i++) {

@@ -5,8 +5,9 @@ import jdk.internal.org.objectweb.asm.Opcodes;
 
 /**
  * FileName:OOMDemo
- * Author:ean
+ * @Author:ean
  * Date:2021/10/11 11:59 下午
+ *
  **/
 public class OOMDemoMethodArea extends ClassLoader{
     public static void main(String[] args) {

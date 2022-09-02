@@ -1,6 +1,6 @@
 package cn.ean.hccp.utils;
 
-import com.sun.deploy.util.ReflectionUtil;
+
 
 /**
  * @author ean
@@ -19,7 +19,7 @@ public class Logger {
      * 带着方法名输出，方法名称放在前面
      */
     public static void fo(Object s) {
-       //  System.out.println(ReflectionUtil + ":" + s);
+         System.out.println(ReflectionUtil.getCallMethod() + ":" + s);
     }
 
     /**

@@ -3,6 +3,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="java_jvm" options="--add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED" />
+      <module name="java_list" options="--add-exports java.base/jdk.internal.misc=ALL-UNNAMED" />
     </option>
   </component>
 </project>

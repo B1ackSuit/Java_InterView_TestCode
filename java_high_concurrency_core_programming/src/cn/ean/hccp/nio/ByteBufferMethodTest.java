@@ -12,6 +12,8 @@ import java.nio.ByteBuffer;
 public class ByteBufferMethodTest {
     // 分配缓冲区
     ByteBuffer buffer = ByteBuffer.allocate(33);
+
+
     @Test
     public void testBufferReset() {
 
@@ -83,7 +85,16 @@ public class ByteBufferMethodTest {
         System.out.println((char) buffer.get());
         System.out.println("after get():   " + buffer);
         // get(index)不影响position的值
-        System.out.println((char) buffer.get(2));
+
+
+        for (int i = 0; i < buffer.limit(); i++) {
+            System.out.print(" " + (char) buffer.get(i) + " ");
+
+        }
+        System.out.println();
+
+
+
         System.out.println("after get(index):   " + buffer);
         byte[] dst = new byte[10];
         buffer.get(dst, 0, 2);

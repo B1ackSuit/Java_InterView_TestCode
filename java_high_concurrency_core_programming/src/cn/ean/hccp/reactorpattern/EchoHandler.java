@@ -19,6 +19,7 @@ class EchoHandler implements Runnable{
 
     //处理器实例的状态：发送和接收，一个连接对应一个处理器实例
     static final int RECIEVING = 0, SENDING = 1;
+
     int state = RECIEVING;
 
     // 构造器
@@ -28,8 +29,10 @@ class EchoHandler implements Runnable{
 
         // 取得选择键，再设置感兴趣的IO事件
         sk = channel.register(selector, 0);
+
         // 将Handler自身作为选择键的附件，一个连接对应一个处理器实例
         sk.attach(this);
+
         // 注册Read就绪事件
         sk.interestOps(SelectionKey.OP_READ);
         selector.wakeup();
@@ -42,10 +45,13 @@ class EchoHandler implements Runnable{
             if (state == SENDING) {
                 // 发送状态，把数据写入连接通道
                 channel.write(byteBuffer);
+
                 // byteBuffer切换成写模式，写完后，就准备开始从通道读
                 byteBuffer.clear();
+
                 // 注册read就绪事件，开始接收客户端数据
                 sk.interestOps(SelectionKey.OP_READ);
+
                 // 修改状态，进入接收状态
                 state = RECIEVING;
             } else if (state == RECIEVING) {

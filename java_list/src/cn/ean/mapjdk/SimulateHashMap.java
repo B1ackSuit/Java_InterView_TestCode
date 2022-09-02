@@ -393,7 +393,6 @@ public class SimulateHashMap<K,V> extends AbstractMap<K,V>
     /**
      *
      * @param cap
-     * @return
      */
     static final int tableSizeFor(int cap) {
         int n = -1 >>> Integer.numberOfLeadingZeros(cap - 1);
@@ -404,6 +403,7 @@ public class SimulateHashMap<K,V> extends AbstractMap<K,V>
 
 
     /**
+     * 
      * 基本哈希bin节点，用于大多数条目。（参见下面的TreeNode子类，以及LinkedHashMap中的Entry子类。）
      */
     static class Node<K,V> implements Map.Entry<K,V> {

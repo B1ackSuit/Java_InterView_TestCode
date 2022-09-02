@@ -30,7 +30,8 @@ public class ReentrantLockBank {
         // Arrays.fill(accounts, initialBalance);
     }
 
-    /* 转账并打印转账信息和所有账户的所有金额只和(判断是否出现金额错误)
+    /**
+     * 转账并打印转账信息和所有账户的所有金额只和(判断是否出现金额错误)
      * @param from 转账出去的账户
      * @param to 转账收钱的账户
      * @param amount 转账的金额
