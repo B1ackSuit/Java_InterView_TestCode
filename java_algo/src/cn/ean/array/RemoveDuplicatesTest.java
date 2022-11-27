@@ -2,9 +2,7 @@ package cn.ean.array;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -70,9 +68,11 @@ public class RemoveDuplicatesTest {
     public void testMain() {
        // int i = removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4});
         int i2 = solution1(new int[]{1, 1 ,2});
+        int [] tem = new int[]{0,0,1,1,1,2,2,3,3,4};
+        int i3 = removeDuplicates20221110(tem);
      //   int i2 = removeDuplicates(new int[]{1, 1 ,2});
      //   int i3 = removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4});
-        System.out.println("result: " + i2);
+        System.out.println("result: " + i3);
     }
 
     /**
@@ -115,5 +115,59 @@ public class RemoveDuplicatesTest {
         }
 
         return nums.length == 0 ? 0 : org+1;
+    }
+
+    //双指针解决
+    public int solution02(int[] A) {
+        //边界条件判断
+        if (A == null || A.length == 0)
+            return 0;
+        int left = 0;
+        for (int right = 1; right < A.length; right++)
+
+            //如果左指针和右指针指向的值一样，说明有重复的，
+            //这个时候，左指针不动，右指针继续往右移。如果他俩
+            //指向的值不一样就把右指针指向的值往前挪
+            if (A[left] != A[right])    A[++left] = A[right];
+        return ++left;
+    }
+
+    /**
+     * 2022-11-10 思路
+     * 一、找出重复的数组的下标，存到新数组中，最后遍历新数据进行更换
+     * 1.利用Set特性
+     * 2.前后比较
+     * 注：下标获取后无法进行后续处理
+     * 注：思路补充：找到第一个重复元素的下标，让其等于后面第一个不在重复元素下标list中的值
+     * 注：第一个不在重复下标list中的值无法找到
+     */
+    public int removeDuplicates20221110(int [] nums){
+        int result = nums.length;
+        List<Integer> list = new ArrayList();
+        Set<Integer> set = new HashSet();
+        for (int i = 0; i < nums.length; i++) {
+            boolean isDuplicate = set.add(nums[i]);
+            if (!isDuplicate) {
+                list.add(i);
+                result -= 1;
+            }
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (list.contains(i)) {
+                if (list.contains(i + 1)) {
+
+                }
+
+            }
+
+        }
+        //  int [] tem = new int[]{0,0,1,1,1,2,2,3,3,4};
+        //  1,3,4,6,8
+        for (int i : nums) {
+            System.out.println(i);
+        }
+
+        return result;
     }
 }

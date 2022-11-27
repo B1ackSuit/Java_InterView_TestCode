@@ -2,6 +2,9 @@ package cn.ean.array;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。
  *
@@ -51,8 +54,28 @@ public class MaxProfitTest {
 
     @Test
     public void testMain() {
-        int i = maxProfit(new int[]{1, 2, 4, 3, 5});
+        int i = maxProfit20221110(new int[]{1, 2, 3, 4, 5});
         System.out.println(i);
+    }
+
+    /**
+     * 思路：记录每次后一个小于前一个数的下标
+     * @param prices
+     * @return
+     */
+    public int maxProfit20221110(int[] prices) {
+        int sum = 0;
+        int ori = 0;
+        for (int i = 0; i < prices.length - 1; i++) {
+            if (prices[i] > prices[i + 1]) {
+                sum += prices[i] - prices[ori];
+                ori = i + 1;
+            }
+            if (i + 1 == prices.length - 1) {
+                sum += prices[i + 1] - prices[ori];
+            }
+        }
+        return sum;
     }
 
     public int maxProfit(int[] prices) {
@@ -63,7 +86,7 @@ public class MaxProfitTest {
         int max = 0;
         for (int i = 0; i < prices.length - 1; i++) {
             if (prices[i] < prices[i+1]) {
-                max = max + prices[i+1] - prices[i];
+                max += prices[i+1] - prices[i];
             }
         }
 

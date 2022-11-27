@@ -52,7 +52,20 @@ public class RotateTest {
 
     @Test
     public void testMain() {
-        rotateByEan(new int[]{1,2,3}, 10);
+       // rotateByEan(new int[]{1,2,3}, 10);
+        System.out.println();
+    }
+
+    /**
+     * 思路：
+     * 一、非原地
+     * 非原地直接使用arraycopy深拷贝
+     * 二、原地
+     * 1.先找到k位置下标(length - k)
+     * @param nums
+     * @param k
+     */
+    public void rotate20221111(int[] nums, int k) {
 
     }
 
