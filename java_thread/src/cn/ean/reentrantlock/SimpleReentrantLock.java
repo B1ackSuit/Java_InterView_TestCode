@@ -23,7 +23,6 @@ public class SimpleReentrantLock {
         try {
             while ("await".equals(awaitLabel)){
                 condition.await();
-
             }
             System.out.println("test simple ReentrantLock ---->>>> " + awaitLabel);
             condition.signalAll();
@@ -40,8 +39,8 @@ public class SimpleReentrantLock {
         try {
             System.out.println("break a wait");
         } finally {
-            System.out.println("unlock");
             reentrantLock.unlock();
+            System.out.println("unlock");
         }
     }
 }

@@ -53,7 +53,7 @@ import java.util.stream.Stream;
  *     nums 已按升序排列
  *
  * 作者：力扣 (LeetCode)
- * 链接：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2gy9m/
+ * 链接：<a href="https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2gy9m/">...</a>
  * 来源：力扣（LeetCode）
  * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
  *
@@ -69,9 +69,9 @@ public class RemoveDuplicatesTest {
        // int i = removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4});
         int i2 = solution1(new int[]{1, 1 ,2});
         int [] tem = new int[]{0,0,1,1,1,2,2,3,3,4};
-        int i3 = removeDuplicates20221110(tem);
+       // int i3 = removeDuplicates20221110(tem);
      //   int i2 = removeDuplicates(new int[]{1, 1 ,2});
-     //   int i3 = removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4});
+        int i3 = removeDuplicates20230109(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4});
         System.out.println("result: " + i3);
     }
 
@@ -120,15 +120,19 @@ public class RemoveDuplicatesTest {
     //双指针解决
     public int solution02(int[] A) {
         //边界条件判断
-        if (A == null || A.length == 0)
+        if (A == null || A.length == 0) {
             return 0;
+        }
         int left = 0;
-        for (int right = 1; right < A.length; right++)
+        for (int right = 1; right < A.length; right++) {
 
             //如果左指针和右指针指向的值一样，说明有重复的，
             //这个时候，左指针不动，右指针继续往右移。如果他俩
             //指向的值不一样就把右指针指向的值往前挪
-            if (A[left] != A[right])    A[++left] = A[right];
+            if (A[left] != A[right]) {
+                A[++left] = A[right];
+            }
+        }
         return ++left;
     }
 
@@ -169,5 +173,24 @@ public class RemoveDuplicatesTest {
         }
 
         return result;
+    }
+
+    /**
+     * 20230109
+     * 思路：双指针
+     * 右指针向右移动与左指针比较，不重复：result+1，重复则继续向右移动
+     * 不重复后左指针也向右移动一位，左指针向右移动是指让++左指针=右指针
+     * 注意：此时左指针可以代替输出结果，但是因为是下标，所以需要+1
+     * @param nums
+     * @return 长度
+     */
+    public int removeDuplicates20230109(int [] nums){
+        int left = 0;
+        for (int right = 1; right < nums.length; right++) {
+            if (nums[left] != nums[right]) {
+                nums[++left] = nums[right];
+            }
+        }
+        return ++left;
     }
 }

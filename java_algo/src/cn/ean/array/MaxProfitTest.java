@@ -55,6 +55,7 @@ public class MaxProfitTest {
     @Test
     public void testMain() {
         int i = maxProfit20221110(new int[]{1, 2, 3, 4, 5});
+        int i1 = maxProfit20230109(new int[]{1, 2, 3, 4, 5});
         System.out.println(i);
     }
 
@@ -93,4 +94,19 @@ public class MaxProfitTest {
         return max;
     }
 
+    /**
+     * 解法：
+     * 思路：只要第二天比第一天高，就卖出
+     * @param prices
+     * @return
+     */
+    public int maxProfit20230109(int [] prices) {
+        int result = 0;
+        for (int i = 0; i < prices.length - 1; i++) {
+            if (prices[i] < prices[i+1]) {
+                result += prices[i+1] - prices[i];
+            }
+        }
+        return result;
+    }
 }
