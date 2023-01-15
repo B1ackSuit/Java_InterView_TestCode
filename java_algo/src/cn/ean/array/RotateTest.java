@@ -2,6 +2,8 @@ package cn.ean.array;
 
 import org.junit.jupiter.api.Test;
 
+
+
 /**
  * 给你一个数组，将数组中的元素向右轮转 k 个位置，其中 k 是非负数。
  *
@@ -53,7 +55,10 @@ public class RotateTest {
     @Test
     public void testMain() {
        // rotateByEan(new int[]{1,2,3}, 10);
-        System.out.println();
+        for (int i = 0; i < 5; i++) {
+            System.out.println(i);
+        }
+      //  System.out.println(3%6);
     }
 
     /**
@@ -77,6 +82,14 @@ public class RotateTest {
         System.arraycopy(nums, nums.length - k, tem, 0, k);
         System.arraycopy(nums, 0, nums, k, nums.length - k);
         System.arraycopy(tem, 0, nums, 0, k);
+    }
+
+    public void rotate20230110(int[] nums, int k) {
+        int [] tem = new int[nums.length];
+        for (int i = 0; i < nums.length; ++i) {
+            tem[(i + k) % nums.length] = nums[i];
+        }
+        System.arraycopy(nums, 0, tem, 0, nums.length);
     }
 
 }

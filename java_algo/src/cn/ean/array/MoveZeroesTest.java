@@ -29,7 +29,7 @@ public class MoveZeroesTest {
     @Test
     public void testMain() {
      //   moveZeroes(new int[] {0,0});
-        solution1(new int[] {1,2,0,4,5});
+        moveZeroes20230115(new int[] {1, 0});
     }
 
     public void solution1(int[] nums) {
@@ -72,4 +72,37 @@ public class MoveZeroesTest {
         System.out.println(buffer);
 
     }
+
+    /**
+     * 交换
+     * @param nums
+     */
+    public void moveZeroes20230115(int[] nums) {
+        int temp;
+        for (int left = 0, right = 0; right < nums.length; right++) {
+            if (nums[right] != 0) {
+                temp = nums[right];
+                nums[right] = nums[left];
+                nums[left] = temp;
+                left++;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

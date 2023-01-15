@@ -25,20 +25,29 @@ public class SingleNumberTest {
     
     @Test
     public void testMain() {
-        int i = singleNumber(new int[]{2, 0, 2, 4, 4});
-        System.out.println(i);
+       // int i = singleNumber(new int[]{2, 0, 2, 4, 4});
+        int i = 0;
+        System.out.println("i = 0 " + i);
+        i = i ^ 2;
+        System.out.println("i ^ 2 " + i);
+        i = i ^ 1;
+        System.out.println("i ^ 1 " + i);
+        i = i ^ 4;
+        System.out.println("i ^ 4 " + i);
+        i = i ^ 2;
+        System.out.println("i ^ 2 " + i);
+        i = i ^ 1;
+        System.out.println("i ^ 1 " + i);
     }
     
     public int singleNumber(int[] nums) {
         int single = 0;
         for (int num : nums) {
-
             single ^= num;
-
         }
         return single;
-
     }
+
 
     public int singleNumber2(int[] nums) {
         Set<Integer> set = new HashSet<>();
@@ -52,7 +61,7 @@ public class SingleNumberTest {
 
     public int singleNumber3(int [] nums) {
         Arrays.sort(nums);
-        for(int i=0;i<nums.length;i++){
+        for(int i = 0; i < nums.length; i++){
             if(i==nums.length-1){
                 return nums[i];
             }
@@ -64,6 +73,33 @@ public class SingleNumberTest {
         }
         return -1;
     }
+
+
+    public int singleNumber20230110(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 1; ++i) {
+            if (nums[i] != nums[i+1]) {
+                if (i == 0) {
+                    return nums[i];
+                } else if (i+2 <= nums.length -1 ) {
+                    if (nums[i+1] != nums[i+2]) {
+                        return nums[i+1];
+                    }
+                } else {
+                    return nums[i + 1];
+                }
+            }
+        }
+        return -1;
+    }
+
+
+
+
+
 
 
 

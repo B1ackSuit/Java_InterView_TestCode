@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一。
@@ -43,7 +44,8 @@ public class PlusOneTest {
 
     @Test
     public void testMain() {
-        int[] ints = plusOne(new int[]{9,8,7,6,5,4,3,2,1,9});
+        int[] ints = plusOne2(new int[]{9,8,7,6,5,4,3,2,1,9});
+        System.out.println(Arrays.toString(ints));
 
     }
 
@@ -61,4 +63,37 @@ public class PlusOneTest {
         temp[0] = 1;
         return temp;
     }
+
+    public int[] plusOne2(int[] digits) {
+        for (int i = digits.length - 1; i >= 0; i--) {
+            if (i == 0 && digits[i] == 9) {
+                digits = new int[digits.length + 1];
+                digits[0] = 1;
+                return digits;
+            }
+            if (digits[i] != 9) {
+                digits[i]++;
+                return digits;
+            } else if (digits[i] == 9) {
+                digits[i] = 0;
+            }
+        }
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

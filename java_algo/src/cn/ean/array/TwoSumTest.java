@@ -70,4 +70,38 @@ public class TwoSumTest {
         }
         return new int[]{0, 0};
     }
+
+
+
+
+    public int[] twoSum20230115(int[] nums, int target) {
+        for (int left = 0; left < nums.length; left++) {
+            for (int right = left + 1; right < nums[right]; right++) {
+                if (nums[left] + nums[right] == target && left != right) {
+                    return new int [] {nums[left], nums[right]};
+                 }
+            }
+        }
+        return new int [0];
+    }
+
+    public int[] twoSum20230115_2(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                return new int[] {map.get(target - nums[i]), i};
+            }
+            map.put(nums[i], i);
+        }
+        return new int[] {0, 0};
+    }
+
+
+
+
+
+
+
+
+
 }
