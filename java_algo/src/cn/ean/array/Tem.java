@@ -15,78 +15,19 @@ public class Tem {
 
     @Test
     public void testTem() {
-        int [] nums = new int[]{1,1,2};
-        int result = removeDuplicates(nums);
-        System.out.println(result);
-    }
-
-    /**
-     * 利用Set的性质
-     *
-     * @param nums
-     * @return
-     */
-    public int removeDuplicates(int [] nums){
-        int result = nums.length;
-        Set set = new HashSet();
+        int [] nums = new int[]{10, 20, 30, 40, 50, 60};
+        int l = 1;
+        int r = 3;
+        nums[l] = nums[r];
         for (int i = 0; i < nums.length; i++) {
-            for (int num : nums){
-                boolean isDuplicate = set.add(num);
-
-                if (!isDuplicate) {
-                    if (i+1 == nums.length) {
-                        nums[i] = nums[i-1];
-                    } else {
-                        nums[i] = nums[i+1];
-                    }
-
-                    result -= 1;
-                }
-            }
+            System.out.print(nums[i] + ", ");
         }
-
-        return result;
     }
 
-    /**
-     * 前后比较
-     * @param nums
-     * @return
-     */
-    public int removeDuplicates02(int [] nums){
-        int result = nums.length;
-        Set set = new HashSet();
-        for (int i = 0; i < nums.length; i++) {
-            for (int num : nums){
-                boolean isDuplicate = set.add(num);
 
-                if (!isDuplicate) {
-                    if (i+1 == nums.length) {
-                        nums[i] = nums[i-1];
-                    } else {
-                        nums[i] = nums[i+1];
-                    }
 
-                    result -= 1;
-                }
-            }
-        }
-
-        return result;
-    }
-
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
-        return null;
-    }
 
 
 
 }
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode() {}
-    ListNode(int val) { this.val = val; }
-    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-}
+
