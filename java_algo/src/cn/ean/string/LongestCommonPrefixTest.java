@@ -18,6 +18,49 @@ public class LongestCommonPrefixTest {
                 new String[] {"1234567", "12asgjkaldj", "12asdfaasdf", "12asdfasasdf", "12adafasdfad"}));
     }
 
+    /**
+     * 横向扫描
+     * 将整个数组的最长公共前缀变成每两个字符串之间的最长公共前缀
+     *
+     * @param strs
+     * @return resultStr
+     */
+    public String longestCommonPrefixByHorizontalScanning(String[] strs) {
+        String resultStr = "";
+        int maxLen;
+        // 第一个与第二个找出最长前缀n1
+        for (int i = 0; i < strs.length; i++) {
+            if (i == strs.length - 1) {
+
+            }
+            maxLen = Math.max(strs[i].length(), strs[i + 1].length());
+            for (int j = 0; j < maxLen; j++) {
+                if (strs[i].charAt(j) != strs[i + 1].charAt(j)) {
+                    break;
+                }
+                resultStr += strs[i].charAt(j);
+            }
+
+        }
+
+        return resultStr;
+    }
+
+    private String longestCommonPrefixByHorizontalScanning2v2(String strs1, String strs2) {
+        String resultStr = "";
+        int maxLen = Math.max(strs1.length(), strs2.length());
+        for (int i = 0; i < maxLen; i++) {
+            if (strs1.charAt(i)!= strs2.charAt(i)) {
+
+            }
+        }
+        return null;
+    }
+
+
+
+
+
     public String longestCommonPrefix(String[] strs) {
         int shortest = 200;
         int commonCount = 0;
